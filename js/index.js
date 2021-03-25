@@ -149,7 +149,7 @@ const pinChosenLoc = (lat, long) => {
 
 //GET ELEVATION DATA FROM API
 const getElevation = async (position) => {
-	const res = await fetch(`http://dev.virtualearth.net/REST/v1/Elevation/List?points=${position}&key=AkwltF7UfGW9gmhG9mJp23mExWCOZHB2R6wxP6W52Jb52z9KDDGhEZOpOlhZtMnI`);
+	const res = await fetch(`https://dev.virtualearth.net/REST/v1/Elevation/List?points=${position}&key=AkwltF7UfGW9gmhG9mJp23mExWCOZHB2R6wxP6W52Jb52z9KDDGhEZOpOlhZtMnI`);
 
 	const result = await res.json();
 	const elevation = result.resourceSets[0].resources[0].elevations[0];
