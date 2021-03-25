@@ -18,9 +18,17 @@ var myMapStyle = {
 };
 
 function GetMap() {
-//Get the map with the constructor Microsoft.Maps	
+	//Get the map with the constructor Microsoft.Maps	
 	map = new Microsoft.Maps.Map('#myMap', {
 		customMapStyle: myMapStyle
+	});
+	map.setOptions({
+		disableScrollWheelZoom: true,
+		enableClickableLogo: false,
+		showMapTypeSelector: false,
+		showScalebar: false,
+		showTermsLink: false,
+		liteMode: true
 	});
 //Get the Searchbox with autosuggest
 	Microsoft.Maps.loadModule(['Microsoft.Maps.AutoSuggest', 'Microsoft.Maps.Search'], function () {
@@ -96,8 +104,7 @@ function geocode() {
 					pins.push(pin);
 					locs.push(r.results[i].location);
 					console.log(r.results[i].location);
-					//output += `<a onclick="pinChosenLoc('${r.results[i].location.latitude},${r.results[i].location.longitude}')">${r.results[i].name}</a></br>`;
-					output += `<a class="searchRes" onclick="getElevation('${r.results[i].location.latitude},${r.results[i].location.longitude}'), pinChosenLoc()">${r.results[i].name}</a></br>`;
+					output += `<a class="searchRes" onclick="getElevation('${r.results[i].location.latitude},${r.results[i].location.longitude}'), pinChosenLoc(${r.results[i].location.latitude}, ${r.results[i].location.longitude})">${r.results[i].name}</a></br>`;
 					console.log(output);
 					//getElevation(`${r.results[i].location.latitude},${r.results[i].location.longitude}`);
 				}
@@ -130,16 +137,14 @@ function geocode() {
 	searchManager.geocode(searchRequest);
 }
 
-const pinChosenLoc = (position) => {
+const pinChosenLoc = (lat, long) => {
 		document.querySelector("main").scrollIntoView(); //scroll up to top (main)
-	/*console.log(position);
-	var pin = new Microsoft.Maps.Pushpin(position);
-	map.entities.push(pin);
-
-	//Center the map on the user's location.
-	map.setView({ center: position, zoom: 17 });
-	getElevation(`${position.latitude},${position.longitude}`);
-	*/
+		console.log(lat, long);
+		//Set the view to user chosen location.
+		map.setView({
+			center: new Microsoft.Maps.Location(lat, long),
+			zoom: 17
+		});
 }
 
 //GET ELEVATION DATA FROM API

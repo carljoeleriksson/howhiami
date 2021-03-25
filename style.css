@@ -175,9 +175,11 @@ h1 {
 	color: #FFACAC;
 }
 
+/*
 .bm_bottomLeftOverlay .bm_bottomRightOverlay {
 	display: none;
 }
+*/
 
 .CopyrightContainer {
 	filter: opacity(0);
@@ -187,10 +189,10 @@ h1 {
 	top: 30% !important;
 }
 
-.NavBar_MapTypeButtonContainerWrapper {
+/*.NavBar_MapTypeButtonContainerWrapper {
 	display: none;
 }
-
+*/
 
 .ball {
 	position: absolute;
