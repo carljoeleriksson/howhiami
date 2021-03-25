@@ -1,9 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Oi&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Modak&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 
 :root {
-	--black-color: #040506;
+	--white-color: #ecf0f1;
+	--purple-color: #3E1E68;
+	--pink-color: #E45A84;
+	--light-pink-color: #FFACAC;
 	scroll-behavior: smooth;
 }
 
@@ -12,7 +14,7 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: #3E1E68;
+	background-color: var(--purple-color);
 	position:relative;
 }
 
@@ -40,9 +42,9 @@ main {
 	align-items: center;
 	animation: bounceInUp;
 	animation-duration: 800ms;
-
 }
 
+/*	HEADER	*/
 header {
 	grid-area: header;
 	text-align: center;
@@ -55,18 +57,20 @@ h1 {
 	font-size: 6rem;
 	font-weight: normal;
 	margin: 0;
-	color: #ecf0f1;
+	color: var(--white-color);
 	letter-spacing: -0.1rem;
 	line-height: 100%;
-	filter: drop-shadow(2px 4px 6px #FFACAC);
+	filter: drop-shadow(2px 4px 6px var(--light-pink-color));
 }
 
+/* Mountain-Logo in h1 */
 .fa-mountain {
 	font-size: 70%;
     position: relative;
     top: -0.5rem;
 }
 
+/*	THE MAP ELEMENT	*/
 #myMap {
 	grid-area: map;
 	width:500px;
@@ -74,10 +78,15 @@ h1 {
 	overflow: hidden;
 	border-radius: 999rem;
 	justify-self: center;
-	filter: drop-shadow(0px 0px 16px #FFACAC);
-
+	filter: drop-shadow(0px 0px 16px var(--light-pink-color));
 }
+.MicrosoftMap .NavBar_Container {
+	top: 30% !important;
+}
+.CopyrightContainer {display: none;}
 
+
+/*	THE ELEVATION ELEMENT */
 #elevation {
 	grid-area: elevation;
 	display: flex;
@@ -91,57 +100,56 @@ h1 {
 	font-size: 10rem;
 	font-weight: normal;
 	margin: 0;
-	color: #ecf0f1;
+	color: var(--white-color);
 	letter-spacing: 0.1rem;
 	line-height: 100%;
 	animation: bounceIn;
 	animation-duration: 1000ms;
-	animation-delay: 2s;
-
+	animation-delay: 2s; /*The JS countUp animation is 2s, and we want it after*/
 }
 
+/*	THE SEARCH BOX & BUTTON		*/
 #searchBoxContainer {
 	grid-area: searchbox;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	margin-top: 2rem;
-	
 }
 
 #searchBox {
 	border: none;
-	background-color: #ecf0f1 !important;
+	outline: none;
+	background-color: var(--white-color) !important;
 	padding: 8px;
 	height: 1.2rem;
-	outline: none;
 	border-radius: 30px;
 }
 
 #searchButton {
 	border: none;
-	background-color: #ecf0f1;
+	outline: none;
+	background-color: var(--white-color);
 	height: 40px;
 	width: 40px;
 	border-radius: 999rem;
-	outline: none;
 	margin-right: 0.7rem;
 	transition: 200ms;
 }
 
 #searchButton:hover {
-	background-color: #FFACAC;
+	background-color: var(--light-pink-color);
 }
 
 #searchButton .fa-search{
-	color:#3E1E68;
+	color:var(--purple-color);
 }
 
 #searchButton:hover .fa-search{
-	color:#ecf0f1;
+	color:var(--white-color);
 }
 
-
+/*	THE OUTPUT ELEMENT where search results are printed by js */
 #output {
 	grid-area: output;
 	display: flex;
@@ -150,15 +158,15 @@ h1 {
 	align-items: center;
 	font-family: 'Fredoka One', cursive;
 	font-size: 1rem;
-	color:#ecf0f1;
+	color:var(--white-color);
 }
 
 #output h3 {
 	font-family: 'Fredoka One', cursive;
 	font-size: 2.8rem;
 	font-weight: normal;
-	color:#ecf0f1;
-	filter: drop-shadow(2px 4px 4px #FFACAC);
+	color:var(--white-color);
+	filter: drop-shadow(2px 4px 4px var(--light-pink-color));
 	margin: 3rem 0 2rem 0;
 }
 
@@ -169,49 +177,20 @@ h1 {
 #output a{
 	cursor: pointer;
 	font-size: 1.3rem;
+	transition: 150ms;
 }
 #output a:hover {
-	filter: drop-shadow(0px 0px 3px #FFACAC);
-	color: #FFACAC;
+	filter: drop-shadow(0px 0px 3px var(--light-pink-color));
+	color: var(--light-pink-color);
 }
 
-/*
-.bm_bottomLeftOverlay .bm_bottomRightOverlay {
-	display: none;
-}
-*/
 
-.CopyrightContainer {
-	filter: opacity(0);
-}
-
-.MicrosoftMap .NavBar_Container {
-	top: 30% !important;
-}
-
-/*.NavBar_MapTypeButtonContainerWrapper {
-	display: none;
-}
-*/
-
+/* BACKGROUND BALLS (located in the .background element) */
 .ball {
 	position: absolute;
 	border-radius: 100%;
 	opacity: 1;
 }
-
-@keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
-}
-
 
 /* BACKGROUND BALLS */
 
@@ -232,7 +211,7 @@ h1 {
 	animation-iteration-count: infinite;
   }
   .background span:nth-child(1) {
-	color: #E45A84;
+	color: var(--pink-color);
 	top: 95%;
 	left: 25%;
 	animation-duration: 13.5s;
@@ -250,7 +229,7 @@ h1 {
 	box-shadow: -40vmin 0 7.2279194799vmin currentColor;
   }
   .background span:nth-child(3) {
-	color: #FFACAC;
+	color: var(--light-pink-color);
 	top: 50%;
 	left: 19%;
 	animation-duration: 12.6s;
@@ -259,7 +238,7 @@ h1 {
 	box-shadow: 40vmin 0 5.7775191792vmin currentColor;
   }
   .background span:nth-child(4) {
-	color: #FFACAC;
+	color: var(--light-pink-color);
 	top: 100%;
 	left: 36%;
 	animation-duration: 11.8s;
@@ -268,7 +247,7 @@ h1 {
 	box-shadow: 40vmin 0 12.3519142844vmin currentColor;
   }
   .background span:nth-child(5) {
-	color: #E45A84;
+	color: var(--pink-color);
 	top: 69%;
 	left: 28%;
 	animation-duration: 10.5s;
@@ -277,7 +256,7 @@ h1 {
 	box-shadow: 40vmin 0 5.5980963124vmin currentColor;
   }
   .background span:nth-child(6) {
-	color: #E45A84;
+	color: var(--pink-color);
 	top: 21%;
 	left: 9%;
 	animation-duration: 10.6s;
@@ -313,7 +292,7 @@ h1 {
 	box-shadow: -40vmin 0 5.3703061373vmin currentColor;
   }
   .background span:nth-child(10) {
-	color: #E45A84;
+	color: var(--pink-color);
 	top: 70%;
 	left: 88%;
 	animation-duration: 14.5s;
@@ -322,7 +301,7 @@ h1 {
 	box-shadow: -40vmin 0 14.9422160041vmin currentColor;
   }
   .background span:nth-child(11) {
-	color: #FFACAC;
+	color: var(--light-pink-color);
 	top: 20%;
 	left: 66%;
 	animation-duration: 13.5s;
@@ -340,7 +319,7 @@ h1 {
 	box-shadow: -40vmin 0 11.2637984485vmin currentColor;
   }
   .background span:nth-child(13) {
-	color: #FFACAC;
+	color: var(--light-pink-color);
 	top: 46%;
 	left: 55%;
 	animation-duration: 13.1s;
@@ -349,7 +328,7 @@ h1 {
 	box-shadow: 40vmin 0 12.4072173328vmin currentColor;
   }
   .background span:nth-child(14) {
-	color: #E45A84;
+	color: var(--pink-color);
 	top: 43%;
 	left: 25%;
 	animation-duration: 15.9s;
@@ -367,7 +346,7 @@ h1 {
 	box-shadow: 40vmin 0 6.387618063vmin currentColor;
   }
   .background span:nth-child(16) {
-	color: #E45A84;
+	color: var(--pink-color);
 	top: 74%;
 	left: 22%;
 	animation-duration: 15.8s;
@@ -376,7 +355,7 @@ h1 {
 	box-shadow: 40vmin 0 8.7128919311vmin currentColor;
   }
   .background span:nth-child(17) {
-	color: #E45A84;
+	color: var(--pink-color);
 	top: 81%;
 	left: 74%;
 	animation-duration: 13.1s;
@@ -385,7 +364,7 @@ h1 {
 	box-shadow: -40vmin 0 11.370304688vmin currentColor;
   }
   .background span:nth-child(18) {
-	color: #E45A84;
+	color: var(--pink-color);
 	top: 30%;
 	left: 48%;
 	animation-duration: 11.8s;
@@ -412,6 +391,7 @@ h1 {
 	box-shadow: 40vmin 0 9.2904367407vmin currentColor;
   }
   
+  /* THE ANIMATION */
   @keyframes move {
 	100% {
 	  transform: translate3d(0, 0, 1px) rotate(360deg);
